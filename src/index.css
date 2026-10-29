@@ -1,0 +1,51 @@
+.taches{
+  border: 1 solid;
+  background-color: cadetblue;
+  border-radius: 5px;
+  box-shadow: 2px 2px 1 gray;
+  display: inline-block;
+  padding: 10px;
+  justify-content:center;
+  margin-bottom: 5px;
+}
+input{
+  margin-bottom: 5px;
+  width: 100%;
+}
+.btn1{
+  text-align: center;
+  padding: 5px;
+  background-color: aqua;
+  border: 0;
+  border-radius: 5px;
+  margin-top: 5px;
+  padding: 10px;
+  
+}
+.box{
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
+  height: auto;
+}
+table{
+  text-align: center;
+ margin-top: 10px;
+  background-color: aliceblue;
+  border-collapse: collapse;
+}
+.chart{
+  background-color: aliceblue;
+  text-align: center;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid black;
+  width:40%;
+  display: flex;
+  justify-content: center;
+}
+.tache{
+  text-align: center;
+  display: flex;
+  width: 40%;
+}
