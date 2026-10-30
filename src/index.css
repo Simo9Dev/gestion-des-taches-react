@@ -7,9 +7,11 @@
   padding: 10px;
   justify-content:center;
   margin-bottom: 5px;
+    box-shadow: 5px 5px 5px 5px gray;
+
 }
 input{
-  margin-bottom: 5px;
+  margin-bottom: 1px;
   width: 100%;
 }
 .btn1{
@@ -27,6 +29,7 @@ input{
   justify-content: space-around;
   width: 100vw;
   height: auto;
+  margin-top: 5%;
 }
 table{
   text-align: center;
@@ -40,12 +43,23 @@ table{
   margin-top: 10px;
   border-radius: 5px;
   border: 1px solid black;
-  width:40%;
+  width:30%;
   display: flex;
   justify-content: center;
+    box-shadow: 5px 5px 5px 5px gray;
+
 }
 .tache{
   text-align: center;
   display: flex;
-  width: 40%;
+  width: 30%;
+    box-shadow: 5px 5px 5px 5px gray;
+
+}
+.analyse{
+  border: 1px solid  black;
+  border-radius: 5px;
+  width: 12%;
+  height: 20%;
+  box-shadow: 5px 5px 5px 5px gray;
 }

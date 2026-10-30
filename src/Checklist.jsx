@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 export default function Checklist() {
-  const [task, setTask] = useState([]);
+  const [task, setTask] = useState(() => {
+    const saved = localStorage.getItem("tasks");
+    return saved ? JSON.parse(saved) : [];
+  });
   const [text, setText] = useState("");
     const [recource, setRecource] = useState("");
   const [date_db, setDate] = useState("");
@@ -11,7 +14,9 @@ export default function Checklist() {
    
 
    const[edit_index,setEdit]= useState(null);
-
+useEffect(() => {
+  localStorage.setItem("tasks", JSON.stringify(task));
+}, [task]);
 function retard(item){
   const this_day = new Date().toLocaleDateString("en-CA");
 if ( item.statut !== "done"){
@@ -96,8 +101,19 @@ function cherche(index){
     <>
    
   <div className="box">
+    <div className="analyse">
+      <h3>Analise des taches:</h3>
+     
+       <p><strong>Nombre de taches: {task.length}</strong></p>
+       <p><strong>Taches done: {task.filter((t) => t.statut === "done").length}</strong></p>
+        <p><strong>Taches en cours: {task.filter((t) => t.statut === "en cours").length}</strong></p>
+     <p><strong>Taches To do: {task.filter((t) => t.statut === "To Do").length}</strong></p>
+
+       <p><strong>Retard taches: {task.filter(retard).length}</strong></p>
+     </div>
     <div className="taches">
       <h2>Checklist</h2>
+
       <label For="tache">Nom de Tache :</label><input
         type="text" id="tache"
         value={text}
@@ -126,8 +142,8 @@ id="st"
           <option value="done"  >done</option>
           <option value="To Do"  >To do</option>
           </select>
-      <br /><button onClick={addItem} class="btn1">Add</button>
-      <label For="cherche">Cherche</label><input type="text" value={texts} onChange={(e)=> setTexts(e.target.value)} />
+      <br /><button onClick={addItem} class="btn1">Add</button><br />
+      <label For="cherche">Cherche :</label><input type="text" value={texts} onChange={(e)=> setTexts(e.target.value)} />
          <table border ="1">
       <tr>
         <th>tache</th>
@@ -139,20 +155,23 @@ id="st"
         <th>Modifier</th>
         
         </tr>
-      {task.map((item, index) => (
-        <tr style={{ backgroundColor : retard(item) ? "red" : "white" }}  >
-          <td>{item.text}</td>
-          <td>{item.date_db}</td>
-          <td>{item.date_fin}</td>
-          <td>{item.recource}</td>
-            <td>{item.statut}</td>
-
-        <td><button onClick={() => deleteItem(index)}>delete</button></td>
-          <td><button onClick={() => modifier(index)}>modifier</button></td>
-        
-        </tr>
-
-      ))}
+       
+   {task.map((item, index) => {
+  if (!item.text.toLowerCase().includes(texts.toLowerCase())) {
+    return null;
+  }
+  return (
+    <tr key={index} style={{ backgroundColor : retard(item) ? "red" : "white" }}>
+      <td>{item.text}</td>
+      <td>{item.date_db}</td>
+      <td>{item.date_fin}</td>
+      <td>{item.recource}</td>
+      <td>{item.statut}</td>
+      <td><button onClick={() => deleteItem(index)}>delete</button></td>
+      <td><button onClick={() => modifier(index)}>modifier</button></td>
+    </tr>
+  );
+})}
       </table>
     </div>
 
