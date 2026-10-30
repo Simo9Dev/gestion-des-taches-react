@@ -15,16 +15,16 @@ export default function Checklist() {
 
    const[edit_index,setEdit]= useState(null);
 useEffect(() => {
+
   localStorage.setItem("tasks", JSON.stringify(task));
 }, [task]);
+
 function retard(item){
   const this_day = new Date().toLocaleDateString("en-CA");
 if ( item.statut !== "done"){
   return this_day > item.date_fin;
 }}
-function cherche(index){
 
-}
 
   function addItem() {
     if (text.trim() === "") {
@@ -62,16 +62,7 @@ function cherche(index){
     setEdit(null)
   }
 
-  function toggleItem(indexToToggle) {
-    const updatedtask = task.map((item, index) => {
-      if (index === indexToToggle) {
-        return { ...item, done: !item.done }; 
-      }
-      return item; 
-    });
 
-    setTask(updatedtask);
-  }
 
   function deleteItem(indexToDelete) {
     const updatedtask = task.filter((item, index) => {
