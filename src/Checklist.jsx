@@ -84,10 +84,11 @@ if ( item.statut !== "done"){
       }
   const data = [
     { name: "To Do", value: task.filter((t) => t.statut === "To Do").length },
-    { name: "en cours", value: task.filter((t) => t.statut === "en cours").length },
+    { name: "en cours", value: task.filter((t) => t.statut === "en cours" && retard(t) == false).length },
     { name: "done", value: task.filter((t) => t.statut === "done").length },
+    { name: "Retard", value:task.filter(retard).length }
   ];
-  const COLORS = ["#f59e0b", "#3b82f6", "#22c55e"];
+  const COLORS = ["#f59e0b", "#3b82f6", "#22c55e","#db0707"];
    return (
     <>
    
@@ -134,7 +135,7 @@ id="st"
           <option value="To Do"  >To do</option>
           </select>
       <br /><button onClick={addItem} class="btn1">Add</button><br />
-      <label For="cherche">Cherche :</label><input type="text" value={texts} onChange={(e)=> setTexts(e.target.value)} />
+      <label For="cherche">Cherche :</label><input type="text" placeholder="Cherche par nom de tache" value={texts} onChange={(e)=> setTexts(e.target.value)} />
          <table border ="1">
       <tr>
         <th>tache</th>
@@ -171,7 +172,7 @@ id="st"
     <div className="chart">
       <h2>Task piechart</h2>
      {task.length > 0 && (
-          <PieChart width={350} height={300}>
+          <PieChart width={350} height={300} >
             <Pie
               data={data}
               dataKey="value"
